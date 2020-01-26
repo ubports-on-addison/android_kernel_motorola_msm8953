@@ -1342,7 +1342,9 @@ qpnp_pon_config_input(struct qpnp_pon *pon,  struct qpnp_pon_config *cfg)
 	}
 
 	/* don't send dummy release event when system resumes */
-	__set_bit(INPUT_PROP_NO_DUMMY_RELEASE, pon->pon_input->propbit);
+	/* Halium: INPUT_PROP_NO_DUMMY_RELEASE defined value conflicts with mainline
+	 * kernel and breaks libinput, so disable it */
+	//__set_bit(INPUT_PROP_NO_DUMMY_RELEASE, pon->pon_input->propbit);
 	input_set_capability(pon->pon_input, EV_KEY, cfg->key_code);
 
 	return 0;
